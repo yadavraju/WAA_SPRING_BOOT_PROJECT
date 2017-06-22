@@ -8,11 +8,11 @@ public class HomeController {
 
 	@GetMapping({ "/", "/index", "/home" })
 	public String homePage() {
-		return "orders";
-	}*/
+		return "home_web";
+	}
 
-/*	@GetMapping({ "/secure" })
+	@GetMapping({"/secure" })
 	public String securePage() {
-		return "secure";
-	}*/
-//}
+		return "/web";
+	}
+}*/

@@ -25,6 +25,7 @@
 								<th>Price</th>
 								<th>Description</th>
 								<th>Type</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -34,6 +35,8 @@
 								<td th:text="${product.price}"></td>
 								<td th:text="${product.description}"></td>
 								<td th:text="${product.productType}"></td>
+								<td th:id="${product.id}"><button
+										class="btn btn-danger delete-product">Delete</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -48,11 +51,12 @@
 						</div>
 						<div class="form-group">
 							<label for="product_price">Price:</label> <input type="text"
-								class="form-control" id="product_price" />
+								class="form-control" id="product_price"/>
 						</div>
+						
 						<div class="form-group">
-							<label for="product_price">Description:</label> <input type="text"
-								class="form-control" id="product_des" />
+							<label for="product_price">Description:</label> <input
+								type="text" class="form-control" id="product_des" />
 						</div>
 						<div class="form-group">
 							<label for="product_price">Type:</label> <input type="text"
@@ -74,7 +78,6 @@
 	</div>
 	<script src="/jquery.js" type="application/javascript"></script>
 	<script type="application/javascript">
-		
     $(document).ready(function () {
        $('#btn_submit').on("click",function (e) {
            e.preventDefault();
@@ -114,8 +117,31 @@
                });
            }
        });
+       
+       $('.delete-product').on("click", function(e){
+           e.preventDefault();
+
+           if(confirm("Are you sure want to delete product?")){
+               var Id = parseInt($(this).closest("td").attr("id"));
+
+               $.ajax({
+                   type:"POST",
+                   url:"/removeproduct",
+                   data:{Id:Id},
+                   success:function (data) {
+                       $(".delete-product").closest("td#"+data).parent("tr").fadeOut("slow",function(){
+                           $(".delete-product").closest("td#"+data).parent("tr").remove();
+                       });
+                   }
+               });
+           }
+
+       });
     });
 
+
+	
+	
 	</script>
 </body>
 </html>
