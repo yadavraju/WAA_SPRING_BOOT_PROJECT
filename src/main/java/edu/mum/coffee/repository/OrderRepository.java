@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.domain.Person;
 import edu.mum.coffee.domain.Product;
 
+@Repository
 public interface OrderRepository extends JpaRepository<Order, Integer>{
 	
 	List<Order> findDistinctOrderByOrderLines_Product(Product product);

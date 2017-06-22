@@ -14,10 +14,25 @@ public class Address {
 	private String state;
 	private String country;
 	private String zipcode;
+	
+	public Address() {
+		super(); // default constructor
+	}
+	
+	//Added for adding static date
+	public Address(String city, String state, String country, String zipcode) {
+		super();
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.zipcode = zipcode;
+	}
 
 	public String getCity() {
 		return city;
 	}
+
+
 
 	public void setCity(String city) {
 		this.city = city;

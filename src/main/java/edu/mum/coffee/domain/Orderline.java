@@ -23,6 +23,10 @@ public class Orderline {
 	@JsonBackReference
 	private Order order;
 
+	public Orderline(){
+		super();
+	}
+	
 	public int getQuantity() {
 		return quantity;
 	}

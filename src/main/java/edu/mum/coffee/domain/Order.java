@@ -43,6 +43,11 @@ public class Order {
 	public List<Orderline> getOrderLines() {
 		return Collections.unmodifiableList(orderLines);
 	}
+	
+
+	public void setOrderLines(List<Orderline> orderLines) {
+		this.orderLines = orderLines;
+	}
 
 	@JsonIgnore
 	public Person getPerson() {
@@ -62,7 +67,7 @@ public class Order {
 	}
 	public String getCustomer(){
 		String customerName = "";
-		customerName +=person.getFirstName()+" "+person.getFirstName();
+		customerName +=person.getFirstName()+" "+person.getLastName();
 		return customerName;
 	}
 	public String getProductNameAndType() {
@@ -106,5 +111,7 @@ public class Order {
 		}
 		orderLines.clear();
 	}
+
+
 
 }
