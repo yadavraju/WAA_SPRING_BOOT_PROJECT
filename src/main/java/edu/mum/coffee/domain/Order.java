@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "OrderTable")
 public class Order {
@@ -27,6 +30,7 @@ public class Order {
 	private Date orderDate;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	//@JsonManagedReference
 	private List<Orderline> orderLines = new ArrayList<Orderline>();
 	@OneToOne
 	private Person person;
@@ -35,10 +39,12 @@ public class Order {
 		return id;
 	}
 
+	@JsonIgnore
 	public List<Orderline> getOrderLines() {
 		return Collections.unmodifiableList(orderLines);
 	}
 
+	@JsonIgnore
 	public Person getPerson() {
 		return person;
 	}
@@ -53,6 +59,18 @@ public class Order {
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+	public String getCustomer(){
+		String customerName = "";
+		customerName +=person.getFirstName()+" "+person.getFirstName();
+		return customerName;
+	}
+	public String getProductNameAndType() {
+		String productName = "";
+		for (Orderline ol : this.orderLines) {
+			productName += ol.getProduct().getProductName()+"/"+ol.getProduct().getProductType();
+		}
+		return productName;
 	}
 
 	public int getQuantity() {

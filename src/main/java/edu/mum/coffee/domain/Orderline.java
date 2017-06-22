@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Orderline")
 public class Orderline {
@@ -18,6 +20,7 @@ public class Orderline {
 	@OneToOne
 	private Product product;
 	@ManyToOne
+	@JsonBackReference
 	private Order order;
 
 	public int getQuantity() {

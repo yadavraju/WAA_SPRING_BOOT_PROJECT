@@ -8,15 +8,10 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-3">
-            <a href="/products"><img src="/logo.png" style="width:100%;"/></a>
-        </div>
-    </div>
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-8 col-md-7 col-sm-6">
-                <h1>Add an Order</h1>
+                <h2>Add an Order</h2>
                 <form>
                     <div class="form-group">
                         <label for="product_name">Select One Product</label>
@@ -45,7 +40,7 @@
         <br />
         <div class="row">
             <div class="col-lg-8 col-md-7 col-sm-6">
-                <h1>List of orders</h1>
+                <h3>List of orders</h3>
 
                 <table class="table table-striped table-hover">
                     <thead>
@@ -53,6 +48,7 @@
                         <th>Order ID</th>
                         <th>Customer</th>
                         <th>Products</th>
+                        <th>Quantity</th>
                         <th>Total</th>
                         <th>Action</th>
                     </tr>
@@ -60,17 +56,12 @@
                     <tbody>
 
                     <tr th:each="order : ${orders}">
-                        <td th:text="${order.orderId}"></td>
-                        <td th:text="${order.customer.firstName + ' ' + order.customer.lastName}"></td>
-                        <td>
-                            <table>
-                                <tr th:each="product :${order.products}">
-                                    <td th:text="${product.productName}"></td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td th:text="${order.total}"></td>
-                        <td th:id="${order.orderId}"><button class="btn btn-danger delete-order">Complete Order</button></td>
+                        <td th:text="${order.id}"></td>
+                        <td th:text="${order.getCustomer()}"></td>
+                        <td th:text = "${(order.getProductNameAndType())}"></td>
+                        <td th:text = "${(order.getQuantity())}"></td>
+                        <td th:text="${order.getTotalAmount()}"></td> 
+                        <td th:id="${order.id}"><button class="btn btn-danger delete-order">Complete Order</button></td>
                     </tr>
                     </tbody>
                 </table>
